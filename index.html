@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>제 64회 진해 군항제 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:    #e8627a;
+      --pink-lt: #f9d0d8;
+      --navy:    #1a2540;
+      --navy-lt: #2c3e6a;
+      --gold:    #c9a84c;
+      --cream:   #fdf6f0;
+      --white:   #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-lt) 60%, #3a2050 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 80px;
+      overflow: hidden;
+    }
+
+    /* floating petals */
+    .petal {
+      position: absolute;
+      width: 18px;
+      height: 22px;
+      border-radius: 70% 30% 70% 30% / 30% 70% 30% 70%;
+      background: rgba(232,98,122,.55);
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-60px) rotate(0deg) scale(1); opacity: .9; }
+      100% { transform: translateY(110vh) rotate(720deg) scale(.5); opacity: 0; }
+    }
+
+    /* hero badge */
+    .hero-badge {
+      display: inline-block;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Noto Serif KR', serif;
+      font-size: .75rem;
+      letter-spacing: .25em;
+      padding: 6px 20px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+      animation: fadeUp .8s .1s both;
+    }
+
+    .hero-year {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 15vw, 10rem);
+      color: rgba(255,255,255,.06);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      animation: fadeUp .8s .25s both;
+      position: relative;
+    }
+    .hero-title span { color: var(--pink); }
+
+    .hero-sub {
+      font-size: clamp(.85rem, 2vw, 1.1rem);
+      color: rgba(255,255,255,.7);
+      margin-top: 20px;
+      line-height: 1.8;
+      animation: fadeUp .8s .4s both;
+    }
+
+    .hero-date-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: .95rem;
+      margin-top: 32px;
+      animation: fadeUp .8s .55s both;
+    }
+    .hero-date-pill .dot { width: 8px; height: 8px; background: var(--pink); border-radius: 50%; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 72px 24px; max-width: 900px; margin: 0 auto; }
+    .section-tag {
+      font-size: .7rem;
+      letter-spacing: .3em;
+      color: var(--pink);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 36px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--pink-lt);
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 60px; height: 2px;
+      background: var(--pink);
+    }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .info-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px 20px;
+      border-left: 4px solid var(--pink);
+      box-shadow: 0 4px 20px rgba(26,37,64,.07);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .info-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(26,37,64,.12); }
+    .info-card .label {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      color: var(--pink);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .info-card .value {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    /* ── PROGRAM LIST ── */
+    .program-list { display: flex; flex-direction: column; gap: 16px; }
+    .program-item {
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      gap: 16px;
+      align-items: start;
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(26,37,64,.06);
+      transition: transform .2s;
+    }
+    .program-item:hover { transform: translateX(4px); }
+    .program-accent { background: var(--pink); min-height: 100%; }
+    .program-body { padding: 20px 20px 20px 0; }
+    .program-name {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .program-meta {
+      font-size: .82rem;
+      color: #666;
+      line-height: 1.7;
+    }
+    .program-meta strong { color: var(--navy-lt); }
+
+    /* ── SCHEDULE TABLE ── */
+    .schedule-table { width: 100%; border-collapse: collapse; }
+    .schedule-table th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: .82rem;
+      font-weight: 500;
+    }
+    .schedule-table td {
+      padding: 11px 16px;
+      font-size: .85rem;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    .schedule-table tr:nth-child(even) td { background: #f9f3f5; }
+    .schedule-table tr:hover td { background: var(--pink-lt); }
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: .7rem;
+      font-weight: 600;
+    }
+    .badge-pink { background: var(--pink-lt); color: var(--pink); }
+    .badge-navy { background: #d8e0f0; color: var(--navy); }
+    .badge-gold { background: #f5ead3; color: #9a6d1a; }
+
+    /* ── TRANSPORT ── */
+    .transport-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .transport-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 3px 14px rgba(26,37,64,.06);
+    }
+    .transport-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .transport-card h4 {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+    .transport-card p { font-size: .83rem; color: #555; line-height: 1.7; }
+
+    /* ── NOTICE BOX ── */
+    .notice-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .notice-box::before {
+      content: '⚠';
+      position: absolute;
+      right: 24px; top: 20px;
+      font-size: 4rem;
+      opacity: .08;
+    }
+    .notice-box h3 {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      color: var(--gold);
+    }
+    .notice-list { list-style: none; }
+    .notice-list li {
+      display: flex;
+      gap: 10px;
+      font-size: .85rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,.88);
+      margin-bottom: 8px;
+    }
+    .notice-list li::before { content: '✦'; color: var(--pink); flex-shrink: 0; margin-top: 2px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.6);
+      text-align: center;
+      padding: 36px 24px;
+      font-size: .8rem;
+      line-height: 1.9;
+    }
+    footer strong { color: var(--white); }
+    footer a { color: var(--pink); text-decoration: none; }
+
+    /* ── DIVIDER ── */
+    .petal-divider {
+      text-align: center;
+      color: var(--pink);
+      font-size: 1.2rem;
+      letter-spacing: .5em;
+      margin: 0 auto;
+      padding: 0 24px 16px;
+    }
+
+    /* ── CHERRY STRIP ── */
+    .cherry-strip {
+      background: var(--pink);
+      color: var(--white);
+      text-align: center;
+      padding: 12px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: .9rem;
+      letter-spacing: .1em;
+    }
+
+    @media (max-width: 540px) {
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .schedule-table { font-size: .78rem; }
+      .schedule-table th, .schedule-table td { padding: 9px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───── HERO ───── -->
+<div class="hero">
+  <!-- petals -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.querySelector('.hero');
+      for (let i = 0; i < 22; i++) {
+        const p = document.createElement('div');
+        p.className = 'petal';
+        const size = 10 + Math.random() * 18;
+        p.style.cssText = `
+          width:${size}px; height:${size * 1.2}px;
+          left:${Math.random() * 100}%;
+          top:${-10 - Math.random() * 20}%;
+          opacity:${0.4 + Math.random() * 0.5};
+          animation-duration:${5 + Math.random() * 9}s;
+          animation-delay:${-Math.random() * 10}s;
+          transform: rotate(${Math.random()*360}deg);
+        `;
+        hero.appendChild(p);
+      }
+    });
+  </script>
+
+  <div class="hero-year">2026</div>
+  <div class="hero-badge">제 64회 · 대한민국 대표 벚꽃 축제</div>
+  <h1 class="hero-title">진해 <span>군항제</span></h1>
+  <p class="hero-sub">
+    봄의 시작을 알리는 벚꽃의 향연<br>
+    창원시 진해구 일원
+  </p>
+  <div class="hero-date-pill">
+    <div class="dot"></div>
+    2026년 3월 27일(금) — 4월 5일(일) &nbsp;|&nbsp; 10일간
+  </div>
+</div>
+
+<div class="cherry-strip">🌸 &nbsp;대한민국 최대 벚꽃 축제에 오신 것을 환영합니다&nbsp; 🌸</div>
+
+<!-- ───── 행사 개요 ───── -->
+<div class="section">
+  <div class="section-tag">Festival Overview</div>
+  <h2 class="section-title">행사 개요</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="label">행사명</div>
+      <div class="value">제 64회 진해 군항제</div>
+    </div>
+    <div class="info-card">
+      <div class="label">기간</div>
+      <div class="value">2026. 3. 27(금)<br>~ 4. 5(일) · 10일간</div>
+    </div>
+    <div class="info-card">
+      <div class="label">장소</div>
+      <div class="value">창원시 진해구<br>중원로터리 및 진해루 일원</div>
+    </div>
+    <div class="info-card">
+      <div class="label">주최·주관</div>
+      <div class="value">사단법인<br>이충무공선양군항제위원회</div>
+    </div>
+    <div class="info-card">
+      <div class="label">입장료</div>
+      <div class="value">무료</div>
+    </div>
+    <div class="info-card">
+      <div class="label">문의</div>
+      <div class="value">055-546-4310<br>055-542-8222</div>
+    </div>
+  </div>
+</div>
+
+<div class="petal-divider">🌸 ❀ 🌸</div>
+
+<!-- ───── 주요 프로그램 ───── -->
+<div class="section" style="padding-top:24px">
+  <div class="section-tag">Programs</div>
+  <h2 class="section-title">주요 프로그램</h2>
+  <div class="program-list">
+
+    <div class="program-item">
+      <div class="program-accent"></div>
+      <div class="program-body">
+        <div class="program-name">🎵 체리블라썸 뮤직 페스티벌</div>
+        <div class="program-meta">
+          <strong>일시</strong> 2026. 4. 3(금) 17:00~21:00 &nbsp;/&nbsp; 4. 4(토)~4. 5(일) 14:00~21:00<br>
+          <strong>장소</strong> 진해공설운동장<br>
+          트롯 · K-POP · 밴드 등 전 세대를 아우르는 봄의 뮤직 페스티벌
+        </div>
+      </div>
+    </div>
+
+    <div class="program-item">
+      <div class="program-accent"></div>
+      <div class="program-body">
+        <div class="program-name">🍺 군항 빌리지</div>
+        <div class="program-meta">
+          <strong>일시</strong> 2026. 3. 27(금) ~ 4. 5(일)<br>
+          <strong>장소</strong> 중원로터리 ~ 창범슈퍼<br>
+          전국 유명 맛집 음식과 맥주가 어우러진 미식 공간
+        </div>
+      </div>
+    </div>
+
+    <div class="program-item">
+      <div class="program-accent"></div>
+      <div class="program-body">
+        <div class="program-name">🛍️ 군항 브랜드 페어</div>
+        <div class="program-meta">
+          <strong>일시</strong> 2026. 3. 27(금) ~ 4. 5(일)<br>
+          <strong>장소</strong> 중원로터리 ~ 미진이지비아APT<br>
+          생활·잡화·농수산물 등 다양한 상품을 직접 보고 맛보는 특별 장터
+        </div>
+      </div>
+    </div>
+
+    <div class="program-item">
+      <div class="program-accent"></div>
+      <div class="program-body">
+        <div class="program-name">🌙 군항 나이트 페스타</div>
+        <div class="program-meta">
+          <strong>일시</strong> 2026. 3. 30(월) ~ 4. 5(일) &nbsp;19:00~21:00<br>
+          <strong>장소</strong> 중원로터리<br>
+          진해군항제의 밤을 열기로 가득 채울 야간 공연 행사
+        </div>
+      </div>
+    </div>
+
+    <div class="program-item">
+      <div class="program-accent"></div>
+      <div class="program-body">
+        <div class="program-name">⚓ 군부대 개방행사</div>
+        <div class="program-meta">
+          <strong>일시</strong> 2026. 3. 28(토) ~ 4. 5(일)<br>
+          <strong>장소</strong> 해군사관학교 · 진해기지사령부 · 군항 11부두<br>
+          군복 체험, 군 장비 탑승·무기체계 체험 등 다양한 이벤트
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="petal-divider">🌸 ❀ 🌸</div>
+
+<!-- ───── 주요 일정 ───── -->
+<div class="section" style="padding-top:24px">
+  <div class="section-tag">Schedule</div>
+  <h2 class="section-title">주요 일정표</h2>
+  <div style="overflow-x:auto; border-radius:10px; box-shadow:0 4px 20px rgba(26,37,64,.08)">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>날짜</th>
+          <th>행사</th>
+          <th>장소</th>
+          <th>구분</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>3. 27(금)</td>
+          <td>개막 · 군항 빌리지 / 브랜드 페어 시작</td>
+          <td>중원로터리 일원</td>
+          <td><span class="badge badge-pink">개막</span></td>
+        </tr>
+        <tr>
+          <td>3. 28(토)</td>
+          <td>군부대 개방행사 시작</td>
+          <td>해군사관학교 외</td>
+          <td><span class="badge badge-navy">체험</span></td>
+        </tr>
+        <tr>
+          <td>3. 30(월)</td>
+          <td>군항 나이트 페스타 시작</td>
+          <td>중원로터리</td>
+          <td><span class="badge badge-pink">공연</span></td>
+        </tr>
+        <tr>
+          <td>4. 3(금)</td>
+          <td>체리블라썸 뮤직페스티벌 (17:00~21:00)</td>
+          <td>진해공설운동장</td>
+          <td><span class="badge badge-gold">뮤직</span></td>
+        </tr>
+        <tr>
+          <td>4. 4(토)</td>
+          <td>체리블라썸 뮤직페스티벌 (14:00~21:00)</td>
+          <td>진해공설운동장</td>
+          <td><span class="badge badge-gold">뮤직</span></td>
+        </tr>
+        <tr>
+          <td>4. 5(일)</td>
+          <td>체리블라썸 뮤직페스티벌 (14:00~21:00) · 폐막</td>
+          <td>진해공설운동장</td>
+          <td><span class="badge badge-pink">폐막</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="petal-divider">🌸 ❀ 🌸</div>
+
+<!-- ───── 교통 안내 ───── -->
+<div class="section" style="padding-top:24px">
+  <div class="section-tag">Transportation</div>
+  <h2 class="section-title">교통 안내</h2>
+  <div class="transport-grid">
+    <div class="transport-card">
+      <span class="transport-icon">🚌</span>
+      <h4>공식 셔틀버스</h4>
+      <p>카카오모빌리티 공식 셔틀버스 운행<br>축제 기간 중 주요 거점에서 탑승 가능<br>사전 예약 권장</p>
+    </div>
+    <div class="transport-card">
+      <span class="transport-icon">🚂</span>
+      <h4>기차 이용</h4>
+      <p>부산역 → KTX/무궁화호 → 창원역<br>창원역에서 시내버스 또는 택시 이용<br>진해선 경화역 주변 벚꽃 명소</p>
+    </div>
+    <div class="transport-card">
+      <span class="transport-icon">🚗</span>
+      <h4>자가용</h4>
+      <p>남해고속도로 진해 IC 이용<br>축제 기간 주차 혼잡 예상<br>대중교통 이용 강력 권장</p>
+    </div>
+    <div class="transport-card">
+      <span class="transport-icon">🚇</span>
+      <h4>지하철·버스</h4>
+      <p>창원 시내버스 진해구 방면 운행<br>실시간 교통 상황은 공식 홈페이지<br>CCTV 교통 정보 참고</p>
+    </div>
+  </div>
+</div>
+
+<div class="petal-divider">🌸 ❀ 🌸</div>
+
+<!-- ───── 관람 유의사항 ───── -->
+<div class="section" style="padding-top:24px; padding-bottom:72px">
+  <div class="section-tag">Notice</div>
+  <h2 class="section-title">관람 유의사항</h2>
+  <div class="notice-box">
+    <h3>⚠ 방문 전 꼭 확인하세요</h3>
+    <ul class="notice-list">
+      <li>드론 촬영은 엄격히 금지되어 있습니다. 군사 시설 인근 구역으로 관련 법령 위반 시 처벌 대상이 됩니다.</li>
+      <li>군부대 개방 행사 참관 시 신분증을 반드시 지참하시기 바랍니다.</li>
+      <li>축제 기간 진해구 일대 극심한 교통 혼잡이 예상됩니다. 대중교통 및 공식 셔틀버스 이용을 적극 권장합니다.</li>
+      <li>벚꽃 개화 상황에 따라 일부 행사 내용이 변경될 수 있습니다. 공식 홈페이지에서 최신 정보를 확인해 주세요.</li>
+      <li>쓰레기 투기 금지, 자연보호 의무를 지켜주시기 바랍니다.</li>
+      <li>체리블라썸 뮤직페스티벌은 별도 운영 사이트(cbmfestival.com)에서 상세 정보를 확인할 수 있습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ───── FOOTER ───── -->
+<footer>
+  <strong>사단법인 이충무공선양군항제위원회</strong><br>
+  창원시 진해구 백구로 41-1 (광화동) &nbsp;|&nbsp; 사업자등록번호 609-82-03101<br>
+  Tel. 055-546-4310 · 055-542-8222 &nbsp;|&nbsp; Fax. 055-545-4635<br>
+  E-mail. <a href="mailto:syh4310@hanmail.net">syh4310@hanmail.net</a><br><br>
+  공식 홈페이지 &nbsp;<a href="https://www.jgfestival.or.kr" target="_blank">www.jgfestival.or.kr</a><br><br>
+  © 2026 진해 군항제. All rights reserved.
+</footer>
+
+</body>
+</html>
